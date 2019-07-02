@@ -26,7 +26,7 @@ public class Order extends BaseEntity {
             inverseJoinColumns = { @JoinColumn(name = "product_id", referencedColumnName = "id")})
     private Set<Product> products = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 }

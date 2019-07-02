@@ -10,6 +10,9 @@ import jannkasper.spring.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Component
@@ -42,6 +45,7 @@ public class Bootstrap implements CommandLineRunner {
         Order order2 = loadOrder(user2, new Product[]{product1,product3});
         Order order3 = loadOrder(user1, new Product[]{product4});
 
+
     }
 
 
@@ -65,7 +69,14 @@ public class Bootstrap implements CommandLineRunner {
 
     private Order loadOrder(User user, Product[] products){
         Order order = new Order();
-        order.setDate(new Date());
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        try {
+            date = new SimpleDateFormat("yyyy-MM-dd").parse(dateFormat.format(new Date()));
+        } catch (ParseException e){
+            e.printStackTrace();
+        }
+        order.setDate(date);
         order.setUser(user);
         order.setStatus(Status.COMPLETED);
 
